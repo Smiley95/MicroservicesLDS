@@ -9,45 +9,41 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PortfolioManager.RepositoriesImp
 {
-    public class CompanyRepository : ICompanyRepository
+    public class InvestorRepository : IInvestorRepository
     {
-
         private readonly DBPortfolioManager _dbContext;
-        public CompanyRepository(DBPortfolioManager dbContext)
-        {
+        public InvestorRepository(DBPortfolioManager dbContext) {
             _dbContext = dbContext;
         }
-
-        public IEnumerable<Company> GetAllCompany()
+        public IEnumerable<Investor> GetAllInvestor()
         {
-            return _dbContext.Companies.ToList();
+            return _dbContext.Investors.ToList();
             throw new NotImplementedException();
         }
 
-        public Company GetCompanyById(string companyID)
+        public Investor GetInvestorById(string investorID)
         {
-            return _dbContext.Companies.Find(companyID);
+            return _dbContext.Investors.Find(investorID);
             throw new NotImplementedException();
         }
 
-        public void InsertCompany(Company company)
+        public void InsertInvestor(Investor investor)
         {
-            _dbContext.Companies.Add(company);
+            _dbContext.Investors.Add(investor);
             Save();
             throw new NotImplementedException();
         }
 
-        public void UpdateCompany(Company company)
+        public void UpdateInvestor(Investor investor)
         {
-            _dbContext.Entry(company).State = EntityState.Modified;
+            _dbContext.Entry(investor).State = EntityState.Modified;
             Save();
             throw new NotImplementedException();
         }
-
-        public void DeleteCompany(string companyID)
+        public void DeleteInvestor(string investorID)
         {
-            var company = _dbContext.Companies.Find(companyID);
-            _dbContext.Companies.Remove(company);
+            var investor = _dbContext.Investors.Find(investorID);
+            _dbContext.Investors.Remove(investor);
             Save();
             throw new NotImplementedException();
         }

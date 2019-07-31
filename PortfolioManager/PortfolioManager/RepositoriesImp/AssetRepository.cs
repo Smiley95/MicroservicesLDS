@@ -50,9 +50,9 @@ namespace PortfolioManager.Repositories
             Save();
             throw new NotImplementedException();
         }
-
         public void Save()
         {
+            _dbContext.SaveChanges();
             throw new NotImplementedException();
         }
 

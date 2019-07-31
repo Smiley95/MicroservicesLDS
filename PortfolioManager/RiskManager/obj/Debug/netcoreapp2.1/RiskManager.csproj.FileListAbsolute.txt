@@ -11,4 +11,3 @@ C:\Users\ETaieb\Desktop\project\PortfolioManager\RiskManager\obj\Debug\netcoreap
 C:\Users\ETaieb\Desktop\project\PortfolioManager\RiskManager\obj\Debug\netcoreapp2.1\RiskManager.RazorTargetAssemblyInfo.cache
 C:\Users\ETaieb\Desktop\project\PortfolioManager\RiskManager\obj\Debug\netcoreapp2.1\RiskManager.dll
 C:\Users\ETaieb\Desktop\project\PortfolioManager\RiskManager\obj\Debug\netcoreapp2.1\RiskManager.pdb
-C:\Users\ETaieb\Desktop\project\PortfolioManager\RiskManager\obj\Debug\netcoreapp2.1\RiskManager.csprojAssemblyReference.cache

@@ -9,7 +9,7 @@ namespace PortfolioManager.Repositories
     public interface IPortfolioRepository
     {
         IEnumerable<Portfolio> GetAllPortfolio();
-        Asset GetPortfolioById(string portfolioID);
+        Portfolio GetPortfolioById(string portfolioID);
         void InsertPortfolio(Portfolio portfolio);
         void UpdatePortfolio(Portfolio portfolio);
         void DeletePortfolio(string portfolioID);

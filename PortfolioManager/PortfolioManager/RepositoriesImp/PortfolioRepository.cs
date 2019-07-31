@@ -2,55 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PortfolioManager.DBContext;
 using PortfolioManager.Models;
 using PortfolioManager.Repositories;
+using PortfolioManager.DBContext;
 using Microsoft.EntityFrameworkCore;
-
 namespace PortfolioManager.RepositoriesImp
 {
-    public class CompanyRepository : ICompanyRepository
+    public class PortfolioRepository : IPortfolioRepository
     {
-
         private readonly DBPortfolioManager _dbContext;
-        public CompanyRepository(DBPortfolioManager dbContext)
+        public PortfolioRepository(DBPortfolioManager dbContext)
         {
             _dbContext = dbContext;
         }
-
-        public IEnumerable<Company> GetAllCompany()
+        public IEnumerable<Portfolio> GetAllPortfolio()
         {
-            return _dbContext.Companies.ToList();
+            return _dbContext.Portfolios.ToList();
             throw new NotImplementedException();
         }
 
-        public Company GetCompanyById(string companyID)
+        public Portfolio GetPortfolioById(string portfolioID)
         {
-            return _dbContext.Companies.Find(companyID);
+            return _dbContext.Portfolios.Find(portfolioID);
             throw new NotImplementedException();
         }
 
-        public void InsertCompany(Company company)
+        public void InsertPortfolio(Portfolio portfolio)
         {
-            _dbContext.Companies.Add(company);
+            _dbContext.Portfolios.Add(portfolio);
             Save();
             throw new NotImplementedException();
         }
 
-        public void UpdateCompany(Company company)
+        public void UpdatePortfolio(Portfolio portfolio)
         {
-            _dbContext.Entry(company).State = EntityState.Modified;
+            _dbContext.Entry(portfolio).State = EntityState.Modified;
+            Save();
+            throw new NotImplementedException();
+        }
+        public void DeletePortfolio(string portfolioID)
+        {
+            var portfolio = _dbContext.Portfolios.Find(portfolioID);
+            _dbContext.Portfolios.Remove(portfolio);
             Save();
             throw new NotImplementedException();
         }
 
-        public void DeleteCompany(string companyID)
-        {
-            var company = _dbContext.Companies.Find(companyID);
-            _dbContext.Companies.Remove(company);
-            Save();
-            throw new NotImplementedException();
-        }
         public void Save()
         {
             _dbContext.SaveChanges();
