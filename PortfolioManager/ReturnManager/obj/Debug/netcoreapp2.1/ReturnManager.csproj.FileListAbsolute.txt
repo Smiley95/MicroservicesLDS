@@ -1,0 +1,14 @@
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\bin\Debug\netcoreapp2.1\ReturnManager.deps.json
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\bin\Debug\netcoreapp2.1\ReturnManager.runtimeconfig.json
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\bin\Debug\netcoreapp2.1\ReturnManager.runtimeconfig.dev.json
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\bin\Debug\netcoreapp2.1\ReturnManager.dll
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\bin\Debug\netcoreapp2.1\ReturnManager.pdb
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.csprojAssemblyReference.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.csproj.CoreCompileInputs.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.RazorAssemblyInfo.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.RazorAssemblyInfo.cs
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.AssemblyInfoInputs.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.AssemblyInfo.cs
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.RazorTargetAssemblyInfo.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.dll
+C:\Users\ETaieb\Desktop\project\PortfolioManager\ReturnManager\obj\Debug\netcoreapp2.1\ReturnManager.pdb

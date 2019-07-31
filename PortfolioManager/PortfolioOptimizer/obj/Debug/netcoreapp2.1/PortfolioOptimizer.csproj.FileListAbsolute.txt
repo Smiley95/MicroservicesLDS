@@ -1,0 +1,14 @@
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\bin\Debug\netcoreapp2.1\PortfolioOptimizer.deps.json
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\bin\Debug\netcoreapp2.1\PortfolioOptimizer.runtimeconfig.json
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\bin\Debug\netcoreapp2.1\PortfolioOptimizer.runtimeconfig.dev.json
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\bin\Debug\netcoreapp2.1\PortfolioOptimizer.dll
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\bin\Debug\netcoreapp2.1\PortfolioOptimizer.pdb
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.csproj.CoreCompileInputs.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.RazorAssemblyInfo.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.RazorAssemblyInfo.cs
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.AssemblyInfoInputs.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.AssemblyInfo.cs
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.RazorTargetAssemblyInfo.cache
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.dll
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.pdb
+C:\Users\ETaieb\Desktop\project\PortfolioManager\PortfolioOptimizer\obj\Debug\netcoreapp2.1\PortfolioOptimizer.csprojAssemblyReference.cache
