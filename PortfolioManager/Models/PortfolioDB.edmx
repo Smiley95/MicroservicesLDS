@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="optimizerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Assets">
+          <Key>
+            <PropertyRef Name="Asset_ID" />
+          </Key>
+          <Property Name="Asset_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asset_nbShare" Type="int" Nullable="false" />
+          <Property Name="Asset_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Asset_AQS_date" Type="date" Nullable="false" />
+          <Property Name="Asset_shareCost" Type="float" Nullable="false" />
+          <Property Name="Asset_currentValue" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Company_ID" />
+          </Key>
+          <Property Name="Company_symbol" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Company_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Company_sector" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Company_type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Company_capital" Type="float" Nullable="false" />
+          <Property Name="Company_totalNbrShares" Type="int" Nullable="false" />
+          <Property Name="Company_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="Currency_symbol" />
+          </Key>
+          <Property Name="Currency_symbol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Currency_name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Currency_exchange_rate" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investors">
+          <Key>
+            <PropertyRef Name="client_ID" />
+          </Key>
+          <Property Name="client_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_fullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="client_age" Type="int" Nullable="false" />
+          <Property Name="client_timeHorizon" Type="int" Nullable="false" />
+          <Property Name="client_email" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Portfolios">
+          <Key>
+            <PropertyRef Name="Portfolio_ID" />
+          </Key>
+          <Property Name="Portfolio_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Portfolio_title" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Portfolio_creation" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="User_pwd" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="User_status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="User_isExpert" Type="int" Nullable="false" />
+          <Property Name="User_Fname" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="User_Lname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="User_address" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="User_email" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="optimizerModelStoreContainer">
+          <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investors" EntityType="Self.Investors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Portfolios" EntityType="Self.Portfolios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="optimizerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Assets">
+          <Key>
+            <PropertyRef Name="Asset_ID" />
+          </Key>
+          <Property Name="Asset_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asset_nbShare" Type="Int32" Nullable="false" />
+          <Property Name="Asset_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Asset_AQS_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Asset_shareCost" Type="Double" Nullable="false" />
+          <Property Name="Asset_currentValue" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Company_ID" />
+          </Key>
+          <Property Name="Company_symbol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_sector" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_capital" Type="Double" Nullable="false" />
+          <Property Name="Company_totalNbrShares" Type="Int32" Nullable="false" />
+          <Property Name="Company_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="Currency_symbol" />
+          </Key>
+          <Property Name="Currency_symbol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Currency_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Currency_exchange_rate" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investors">
+          <Key>
+            <PropertyRef Name="client_ID" />
+          </Key>
+          <Property Name="client_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="client_age" Type="Int32" Nullable="false" />
+          <Property Name="client_timeHorizon" Type="Int32" Nullable="false" />
+          <Property Name="client_email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Portfolios">
+          <Key>
+            <PropertyRef Name="Portfolio_ID" />
+          </Key>
+          <Property Name="Portfolio_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Portfolio_title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Portfolio_creation" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_pwd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_isExpert" Type="Int32" Nullable="false" />
+          <Property Name="User_Fname" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Lname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_address" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="optimizerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assets" EntityType="Self.Assets" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" />
+          <EntitySet Name="Investors" EntityType="Self.Investors" />
+          <EntitySet Name="Portfolios" EntityType="Self.Portfolios" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="optimizerModelStoreContainer" CdmEntityContainer="optimizerEntities">
+          <EntitySetMapping Name="Assets">
+            <EntityTypeMapping TypeName="optimizerModel.Assets">
+              <MappingFragment StoreEntitySet="Assets">
+                <ScalarProperty Name="Asset_ID" ColumnName="Asset_ID" />
+                <ScalarProperty Name="Asset_nbShare" ColumnName="Asset_nbShare" />
+                <ScalarProperty Name="Asset_name" ColumnName="Asset_name" />
+                <ScalarProperty Name="Asset_AQS_date" ColumnName="Asset_AQS_date" />
+                <ScalarProperty Name="Asset_shareCost" ColumnName="Asset_shareCost" />
+                <ScalarProperty Name="Asset_currentValue" ColumnName="Asset_currentValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="optimizerModel.Companies">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="Company_symbol" ColumnName="Company_symbol" />
+                <ScalarProperty Name="Company_name" ColumnName="Company_name" />
+                <ScalarProperty Name="Company_sector" ColumnName="Company_sector" />
+                <ScalarProperty Name="Company_type" ColumnName="Company_type" />
+                <ScalarProperty Name="Company_capital" ColumnName="Company_capital" />
+                <ScalarProperty Name="Company_totalNbrShares" ColumnName="Company_totalNbrShares" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="optimizerModel.Currencies">
+              <MappingFragment StoreEntitySet="Currencies">
+                <ScalarProperty Name="Currency_symbol" ColumnName="Currency_symbol" />
+                <ScalarProperty Name="Currency_name" ColumnName="Currency_name" />
+                <ScalarProperty Name="Currency_exchange_rate" ColumnName="Currency_exchange_rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investors">
+            <EntityTypeMapping TypeName="optimizerModel.Investors">
+              <MappingFragment StoreEntitySet="Investors">
+                <ScalarProperty Name="client_ID" ColumnName="client_ID" />
+                <ScalarProperty Name="client_fullName" ColumnName="client_fullName" />
+                <ScalarProperty Name="client_age" ColumnName="client_age" />
+                <ScalarProperty Name="client_timeHorizon" ColumnName="client_timeHorizon" />
+                <ScalarProperty Name="client_email" ColumnName="client_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Portfolios">
+            <EntityTypeMapping TypeName="optimizerModel.Portfolios">
+              <MappingFragment StoreEntitySet="Portfolios">
+                <ScalarProperty Name="Portfolio_ID" ColumnName="Portfolio_ID" />
+                <ScalarProperty Name="Portfolio_title" ColumnName="Portfolio_title" />
+                <ScalarProperty Name="Portfolio_creation" ColumnName="Portfolio_creation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="optimizerModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="User_name" ColumnName="User_name" />
+                <ScalarProperty Name="User_pwd" ColumnName="User_pwd" />
+                <ScalarProperty Name="User_status" ColumnName="User_status" />
+                <ScalarProperty Name="User_isExpert" ColumnName="User_isExpert" />
+                <ScalarProperty Name="User_Fname" ColumnName="User_Fname" />
+                <ScalarProperty Name="User_Lname" ColumnName="User_Lname" />
+                <ScalarProperty Name="User_address" ColumnName="User_address" />
+                <ScalarProperty Name="User_email" ColumnName="User_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

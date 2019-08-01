@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="optimizerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Assets">
+    <Key>
+      <PropertyRef Name="Asset_ID" />
+    </Key>
+    <Property Name="Asset_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Asset_nbShare" Type="int" Nullable="false" />
+    <Property Name="Asset_name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Asset_AQS_date" Type="date" Nullable="false" />
+    <Property Name="Asset_shareCost" Type="float" Nullable="false" />
+    <Property Name="Asset_currentValue" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comapnies">
+    <Key>
+      <PropertyRef Name="Company_ID" />
+    </Key>
+    <Property Name="Company_symbol" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Company_name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Company_sector" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Company_type" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Company_capital" Type="float" Nullable="false" />
+    <Property Name="Company_totalNbrShares" Type="int" Nullable="false" />
+    <Property Name="Company_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'optimizer.dbo.Companies' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="Currencies">
+    <Key>
+      <PropertyRef Name="Currency_symbol" />
+    </Key>
+    <Property Name="Currency_symbol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Currency_name" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Currency_exchange_rate" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Investors">
+    <Key>
+      <PropertyRef Name="client_ID" />
+    </Key>
+    <Property Name="client_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="client_fullName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="client_age" Type="int" Nullable="false" />
+    <Property Name="client_timeHorizon" Type="int" Nullable="false" />
+    <Property Name="client_email" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Portfolios">
+    <Key>
+      <PropertyRef Name="Portfolio_ID" />
+    </Key>
+    <Property Name="Portfolio_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Portfolio_title" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Portfolio_creation" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="User_pwd" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="User_status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="User_isExpert" Type="int" Nullable="false" />
+    <Property Name="User_Fname" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="User_Lname" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="User_address" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="User_email" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="optimizerModelStoreContainer">
+    <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comapnies" EntityType="Self.Comapnies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Investors" EntityType="Self.Investors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Portfolios" EntityType="Self.Portfolios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
