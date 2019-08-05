@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="optimizerModelStoreContainer" CdmEntityContainer="UsersEntities">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="optimizerModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="User_name" ColumnName="User_name" />
+          <ScalarProperty Name="User_pwd" ColumnName="User_pwd" />
+          <ScalarProperty Name="User_status" ColumnName="User_status" />
+          <ScalarProperty Name="User_isExpert" ColumnName="User_isExpert" />
+          <ScalarProperty Name="User_Fname" ColumnName="User_Fname" />
+          <ScalarProperty Name="User_Lname" ColumnName="User_Lname" />
+          <ScalarProperty Name="User_address" ColumnName="User_address" />
+          <ScalarProperty Name="User_email" ColumnName="User_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -16,7 +16,8 @@ namespace PortfolioManager.Controllers
     {
         private optimizerEntities db = new optimizerEntities();
 
-        // GET: api/Assets
+        [HttpGet]
+        [Route("api/Assets")] 
         public IQueryable<Assets> GetAssets()
         {
             return db.Assets;

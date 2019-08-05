@@ -101,6 +101,7 @@ C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\System.Web.WebPages.Razor.x
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\Antlr3.Runtime.pdb
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\EntityFramework.resources.dll
+C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\EntityFramework.SqlServer.resources.dll
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\System.Net.Http.Formatting.resources.dll
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\System.Web.Helpers.resources.dll
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\System.Web.Http.resources.dll
@@ -111,6 +112,7 @@ C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\System.Web.Razor.resourc
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\System.Web.WebPages.resources.dll
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\System.Web.WebPages.Deployment.resources.dll
 C:\Users\ETaieb\Desktop\project\PortfolioManager\bin\fr\System.Web.WebPages.Razor.resources.dll
+C:\Users\ETaieb\Desktop\project\PortfolioManager\obj\Debug\PortfolioManager.csprojAssemblyReference.cache
 C:\Users\ETaieb\Desktop\project\PortfolioManager\obj\Debug\PortfolioManager.csproj.CoreCompileInputs.cache
 C:\Users\ETaieb\Desktop\project\PortfolioManager\obj\Debug\PortfolioManager.csproj.CopyComplete
 C:\Users\ETaieb\Desktop\project\PortfolioManager\obj\Debug\PortfolioManager.dll
