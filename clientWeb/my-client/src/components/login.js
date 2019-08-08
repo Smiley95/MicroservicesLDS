@@ -1,4 +1,19 @@
 import React from 'react';
+import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
+import './login.css';
+import HomePage from './homePage';
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBModalFooter,
+  MDBIcon,
+  MDBCardHeader,
+  MDBBtn,
+  MDBInput
+} from "mdbreact";
 
 class Login extends React.Component {
     constructor(props){
@@ -7,8 +22,7 @@ class Login extends React.Component {
           username:'',
           password:'',
           submitted: false,
-          token: '',
-          loading: false,
+          token: ''
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,8 +64,7 @@ class Login extends React.Component {
         }
         else{
           this.setState({ token: data['access_token'] })
-          console.log(this.state.token)
-          this.setState({ loading: true, })
+          console.log(this.state.token);
         }
         
         
@@ -60,35 +73,89 @@ class Login extends React.Component {
       
   }
     render() {
+      if(this.state.token){
         return (
-        <div className="col-md-6 col-md-offset-3">
-        <div>hello there {this.state.token}</div>
-        <h2>Login</h2>
-        <form name="form" onSubmit={this.handleSubmit}>
-            <div className={'form-group' + (this.state.submitted && !this.state.username ? ' has-error' : '')}>
-                <label htmlFor="username">Username</label>
-                <input type="text" className="form-control" name="username" value={this.state.username} onChange={this.handleChange} />
-                {this.state.submitted && !this.state.username &&
-                    <div className="help-block">Username is required</div>
+        
+          <Router>
+          <Redirect to='/home'/>
+          <Route exact path="/home" render={(props) => <HomePage {...props} token={this.state.token} />}/>
+        </Router>
+        );
+      }
+      else{
+        return (
+          
+            <MDBContainer className="d-flex justify-content-center">
+      <MDBRow>hello there {this.state.token}</MDBRow>
+      <MDBRow >
+        <MDBCol md="12">
+          <MDBCard>
+            <MDBCardBody>
+              <MDBCardHeader className="form-header deep-blue-gradient rounded">
+                <h3 className="my-3">
+                  <MDBIcon icon="lock" /> Login:
+                </h3>
+              </MDBCardHeader>
+              <form name="form" onSubmit={this.handleSubmit}>
+                <div className={ 'grey-text form-group' + (this.state.submitted && !this.state.username ? ' has-error' : '')}>
+                  <MDBInput
+                    label="Type your username"
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                    icon="user-tie"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                  />
+                </div>
+                <div className={ 'grey-text form-group' + (this.state.submitted && !this.state.password ? ' has-error' : '')}>
+                <MDBInput
+                    label="Type your password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    icon="unlock-alt"
+                    group
+                    type="password"
+                    validate
+                  />
+                </div>
+              <div className="text-center mt-4">
+                {this.state.username && this.state.password && 
+                  <MDBBtn
+                  color="light-blue"
+                  className="mb-3"
+                  type="submit"
+                >
+                  Login
+                </MDBBtn>
                 }
-            </div>
-            <div className={'form-group' + (this.state.submitted && !this.state.password ? ' has-error' : '')}>
-                <label htmlFor="password">Password</label>
-                <input type="password" className="form-control" name="password" value={this.state.password} onChange={this.handleChange} />
-                {this.state.submitted && !this.state.password &&
-                    <div className="help-block">Password is required</div>
+                {!(this.state.username && this.state.password) && 
+                  <MDBBtn disabled
+                  color="light-blue"
+                  className="mb-3"
+                  type="submit"
+                >
+                  Login
+                </MDBBtn>
                 }
-            </div>
-            <div className="form-group">
-                <button className="btn btn-primary" disabled={this.state.loading} >Login</button>
-                {this.state.loading &&
-                  <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                }
-                
-            </div>
-            
-        </form>
-    </div>)
+                </div>
+              </form>
+              <MDBModalFooter>
+                <div className="font-weight-light">
+                  <p>Forgot Password?</p>
+                </div>
+              </MDBModalFooter>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+      );    
+              }        
       }
 }
 export default Login;

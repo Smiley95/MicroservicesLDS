@@ -12,6 +12,7 @@ using PortfolioManager.Models;
 
 namespace PortfolioManager.Controllers
 {
+    [Authorize]
     public class AssetsController : ApiController
     {
         private optimizerEntities db = new optimizerEntities();
