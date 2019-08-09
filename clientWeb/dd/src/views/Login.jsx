@@ -1,7 +1,7 @@
 import React from 'react';
+import DashboardPage from "./Dashboard/Dashboard.jsx";
+import "mdbreact/dist/css/mdb.css";
 import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
-import './login.css';
-import HomePage from './homePage';
 import {
   MDBContainer,
   MDBRow,
@@ -77,8 +77,8 @@ class Login extends React.Component {
         return (
         
           <Router>
-          <Redirect to='/home'/>
-          <Route exact path="/home" render={(props) => <HomePage {...props} token={this.state.token} username={this.state.username} password={this.state.password} />}/>
+          <Redirect to='/dashboard'/>
+          <Route exact path="/dashboard" render={(props) => <DashboardPage {...props} token={this.state.token} username={this.state.username} password={this.state.password} />}/>
         </Router>
         );
       }
@@ -86,7 +86,6 @@ class Login extends React.Component {
         return (
           
             <MDBContainer className="d-flex justify-content-center">
-      <MDBRow>hello there {this.state.token}</MDBRow>
       <MDBRow >
         <MDBCol md="12">
           <MDBCard>
