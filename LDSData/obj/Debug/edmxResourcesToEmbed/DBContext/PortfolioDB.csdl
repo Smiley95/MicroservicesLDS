@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LDSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="Asset_ID" />
+    </Key>
+    <Property Name="Asset_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Asset_nbShare" Type="Int32" Nullable="false" />
+    <Property Name="Asset_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Asset_AQS_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Asset_shareCost" Type="Double" Nullable="false" />
+    <Property Name="Asset_currentValue" Type="Double" Nullable="false" />
+    <Property Name="PortfolioID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_Asset_Company" FromRole="Asset" ToRole="Company" />
+    <NavigationProperty Name="Portfolio" Relationship="Self.FK_Asset_Portfolio" FromRole="Asset" ToRole="Portfolio" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Company_symbol" />
+    </Key>
+    <Property Name="Company_symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_sector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_capital" Type="Double" Nullable="false" />
+    <Property Name="Company_totalNbrShares" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Asset" Relationship="Self.FK_Asset_Company" FromRole="Company" ToRole="Asset" />
+  </EntityType>
+  <EntityType Name="Investor">
+    <Key>
+      <PropertyRef Name="Investor_ID" />
+    </Key>
+    <Property Name="Investor_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Investor_FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Investor_birth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Investor_timeHorizon" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Investor_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Expert_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Investor_User" FromRole="Investor" ToRole="User" />
+    <NavigationProperty Name="Portfolio" Relationship="Self.FK_Portfolio_Investor" FromRole="Investor" ToRole="Portfolio" />
+  </EntityType>
+  <EntityType Name="Portfolio">
+    <Key>
+      <PropertyRef Name="Portfolio_ID" />
+    </Key>
+    <Property Name="Portfolio_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Portfolio_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Portfolio_creationDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Investor_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Asset" Relationship="Self.FK_Asset_Portfolio" FromRole="Portfolio" ToRole="Asset" />
+    <NavigationProperty Name="Investor" Relationship="Self.FK_Portfolio_Investor" FromRole="Portfolio" ToRole="Investor" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="User_email" />
+    </Key>
+    <Property Name="User_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Investor" Relationship="Self.FK_Investor_User" FromRole="User" ToRole="Investor" />
+  </EntityType>
+  <Association Name="FK_Asset_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Company_symbol" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="Company_symbol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_Portfolio">
+    <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Portfolio">
+        <PropertyRef Name="Portfolio_ID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="PortfolioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Investor_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Investor" Type="Self.Investor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="User_email" />
+      </Principal>
+      <Dependent Role="Investor">
+        <PropertyRef Name="Expert_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Portfolio_Investor">
+    <End Role="Investor" Type="Self.Investor" Multiplicity="1" />
+    <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Investor">
+        <PropertyRef Name="Investor_ID" />
+      </Principal>
+      <Dependent Role="Portfolio">
+        <PropertyRef Name="Investor_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LDSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Asset" EntityType="Self.Asset" />
+    <EntitySet Name="Company" EntityType="Self.Company" />
+    <EntitySet Name="Investor" EntityType="Self.Investor" />
+    <EntitySet Name="Portfolio" EntityType="Self.Portfolio" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_Asset_Company" Association="Self.FK_Asset_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Asset" EntitySet="Asset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_Portfolio" Association="Self.FK_Asset_Portfolio">
+      <End Role="Portfolio" EntitySet="Portfolio" />
+      <End Role="Asset" EntitySet="Asset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Investor_User" Association="Self.FK_Investor_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Investor" EntitySet="Investor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Portfolio_Investor" Association="Self.FK_Portfolio_Investor">
+      <End Role="Investor" EntitySet="Investor" />
+      <End Role="Portfolio" EntitySet="Portfolio" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

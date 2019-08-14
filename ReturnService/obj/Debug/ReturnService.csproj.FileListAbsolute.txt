@@ -53,7 +53,6 @@ C:\Users\ETaieb\Desktop\project\ReturnService\bin\EntityFramework.SqlServer.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\Newtonsoft.Json.dll
-C:\Users\ETaieb\Desktop\project\ReturnService\bin\PortfolioManager.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\System.Net.Http.Formatting.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\System.Web.Helpers.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\System.Web.Http.dll
@@ -65,8 +64,6 @@ C:\Users\ETaieb\Desktop\project\ReturnService\bin\System.Web.WebPages.Deployment
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\System.Web.WebPages.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\System.Web.WebPages.Razor.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\WebGrease.dll
-C:\Users\ETaieb\Desktop\project\ReturnService\bin\PortfolioManager.pdb
-C:\Users\ETaieb\Desktop\project\ReturnService\bin\PortfolioManager.dll.config
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\EntityFramework.xml
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\EntityFramework.SqlServer.xml
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\Newtonsoft.Json.xml
@@ -83,7 +80,6 @@ C:\Users\ETaieb\Desktop\project\ReturnService\bin\System.Web.WebPages.Razor.xml
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\Antlr3.Runtime.pdb
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\EntityFramework.resources.dll
-C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\EntityFramework.SqlServer.resources.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\System.Net.Http.Formatting.resources.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\System.Web.Helpers.resources.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\System.Web.Http.resources.dll

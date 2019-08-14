@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="optimizerModelStoreContainer" CdmEntityContainer="optimizerEntities">
+  <EntityContainerMapping StorageEntityContainer="optimizerModelStoreContainer" CdmEntityContainer="optimizerEntities1">
     <EntitySetMapping Name="Assets">
       <EntityTypeMapping TypeName="optimizerModel.Assets">
         <MappingFragment StoreEntitySet="Assets">
@@ -10,6 +10,7 @@
           <ScalarProperty Name="Asset_AQS_date" ColumnName="Asset_AQS_date" />
           <ScalarProperty Name="Asset_shareCost" ColumnName="Asset_shareCost" />
           <ScalarProperty Name="Asset_currentValue" ColumnName="Asset_currentValue" />
+          <ScalarProperty Name="Company_symbol" ColumnName="Company_symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -22,7 +23,6 @@
           <ScalarProperty Name="Company_type" ColumnName="Company_type" />
           <ScalarProperty Name="Company_capital" ColumnName="Company_capital" />
           <ScalarProperty Name="Company_totalNbrShares" ColumnName="Company_totalNbrShares" />
-          <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -38,11 +38,11 @@
     <EntitySetMapping Name="Investors">
       <EntityTypeMapping TypeName="optimizerModel.Investors">
         <MappingFragment StoreEntitySet="Investors">
-          <ScalarProperty Name="client_ID" ColumnName="client_ID" />
           <ScalarProperty Name="client_fullName" ColumnName="client_fullName" />
           <ScalarProperty Name="client_age" ColumnName="client_age" />
           <ScalarProperty Name="client_timeHorizon" ColumnName="client_timeHorizon" />
           <ScalarProperty Name="client_email" ColumnName="client_email" />
+          <ScalarProperty Name="expert_ID" ColumnName="expert_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -52,6 +52,7 @@
           <ScalarProperty Name="Portfolio_ID" ColumnName="Portfolio_ID" />
           <ScalarProperty Name="Portfolio_title" ColumnName="Portfolio_title" />
           <ScalarProperty Name="Portfolio_creation" ColumnName="Portfolio_creation" />
+          <ScalarProperty Name="investorID" ColumnName="investorID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -62,7 +63,7 @@
           <ScalarProperty Name="User_name" ColumnName="User_name" />
           <ScalarProperty Name="User_pwd" ColumnName="User_pwd" />
           <ScalarProperty Name="User_status" ColumnName="User_status" />
-          <ScalarProperty Name="User_isExpert" ColumnName="User_isExpert" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="User_Fname" ColumnName="User_Fname" />
           <ScalarProperty Name="User_Lname" ColumnName="User_Lname" />
           <ScalarProperty Name="User_address" ColumnName="User_address" />

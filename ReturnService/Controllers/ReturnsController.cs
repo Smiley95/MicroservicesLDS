@@ -8,48 +8,48 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using ReturnService.Models;
+using ReturnService.DBContext;
 
 namespace ReturnService.Controllers
 {
     public class ReturnsController : ApiController
     {
-        private optimizerEntities db = new optimizerEntities();
+        private LDSEntities db = new LDSEntities();
 
         // GET: api/Returns
-        public IQueryable<Returns> GetReturns()
+        public IQueryable<Return> GetReturn()
         {
-            return db.Returns;
+            return db.Return;
         }
 
         // GET: api/Returns/5
-        [ResponseType(typeof(Returns))]
-        public IHttpActionResult GetReturns(string id)
+        [ResponseType(typeof(Return))]
+        public IHttpActionResult GetReturn(string id)
         {
-            Returns returns = db.Returns.Find(id);
-            if (returns == null)
+            Return @return = db.Return.Find(id);
+            if (@return == null)
             {
                 return NotFound();
             }
 
-            return Ok(returns);
+            return Ok(@return);
         }
 
         // PUT: api/Returns/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutReturns(string id, Returns returns)
+        public IHttpActionResult PutReturn(string id, Return @return)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != returns.Return_ID)
+            if (id != @return.return_ID)
             {
                 return BadRequest();
             }
 
-            db.Entry(returns).State = EntityState.Modified;
+            db.Entry(@return).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace ReturnService.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReturnsExists(id))
+                if (!ReturnExists(id))
                 {
                     return NotFound();
                 }
@@ -71,15 +71,15 @@ namespace ReturnService.Controllers
         }
 
         // POST: api/Returns
-        [ResponseType(typeof(Returns))]
-        public IHttpActionResult PostReturns(Returns returns)
+        [ResponseType(typeof(Return))]
+        public IHttpActionResult PostReturn(Return @return)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Returns.Add(returns);
+            db.Return.Add(@return);
 
             try
             {
@@ -87,7 +87,7 @@ namespace ReturnService.Controllers
             }
             catch (DbUpdateException)
             {
-                if (ReturnsExists(returns.Return_ID))
+                if (ReturnExists(@return.return_ID))
                 {
                     return Conflict();
                 }
@@ -97,23 +97,23 @@ namespace ReturnService.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = returns.Return_ID }, returns);
+            return CreatedAtRoute("DefaultApi", new { id = @return.return_ID }, @return);
         }
 
         // DELETE: api/Returns/5
-        [ResponseType(typeof(Returns))]
-        public IHttpActionResult DeleteReturns(string id)
+        [ResponseType(typeof(Return))]
+        public IHttpActionResult DeleteReturn(string id)
         {
-            Returns returns = db.Returns.Find(id);
-            if (returns == null)
+            Return @return = db.Return.Find(id);
+            if (@return == null)
             {
                 return NotFound();
             }
 
-            db.Returns.Remove(returns);
+            db.Return.Remove(@return);
             db.SaveChanges();
 
-            return Ok(returns);
+            return Ok(@return);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +125,9 @@ namespace ReturnService.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ReturnsExists(string id)
+        private bool ReturnExists(string id)
         {
-            return db.Returns.Count(e => e.Return_ID == id) > 0;
+            return db.Return.Count(e => e.return_ID == id) > 0;
         }
     }
 }

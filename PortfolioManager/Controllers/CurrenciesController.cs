@@ -12,6 +12,7 @@ using PortfolioManager.Models;
 
 namespace PortfolioManager.Controllers
 {
+    [Authorize(Roles = "Expert")]
     public class CurrenciesController : ApiController
     {
         private optimizerEntities db = new optimizerEntities();

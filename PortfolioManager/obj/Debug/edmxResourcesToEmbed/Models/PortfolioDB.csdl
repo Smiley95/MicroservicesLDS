@@ -10,18 +10,20 @@
     <Property Name="Asset_AQS_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Asset_shareCost" Type="Double" Nullable="false" />
     <Property Name="Asset_currentValue" Type="Double" Nullable="false" />
+    <Property Name="Company_symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Companies" Relationship="Self.FK_Assets_Companies" FromRole="Assets" ToRole="Companies" />
   </EntityType>
   <EntityType Name="Companies">
     <Key>
-      <PropertyRef Name="Company_ID" />
+      <PropertyRef Name="Company_symbol" />
     </Key>
-    <Property Name="Company_symbol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company_symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Company_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Company_sector" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Company_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Company_capital" Type="Double" Nullable="false" />
     <Property Name="Company_totalNbrShares" Type="Int32" Nullable="false" />
-    <Property Name="Company_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Assets_Companies" FromRole="Companies" ToRole="Assets" />
   </EntityType>
   <EntityType Name="Currencies">
     <Key>
@@ -33,13 +35,14 @@
   </EntityType>
   <EntityType Name="Investors">
     <Key>
-      <PropertyRef Name="client_ID" />
+      <PropertyRef Name="client_email" />
     </Key>
-    <Property Name="client_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="client_fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="client_age" Type="Int32" Nullable="false" />
     <Property Name="client_timeHorizon" Type="Int32" Nullable="false" />
     <Property Name="client_email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="expert_ID" Type="Int32" />
+    <NavigationProperty Name="Portfolios" Relationship="optimizerModel.FK_Portfolios_Investors" FromRole="Investors" ToRole="Portfolios" />
   </EntityType>
   <EntityType Name="Portfolios">
     <Key>
@@ -48,27 +51,61 @@
     <Property Name="Portfolio_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Portfolio_title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Portfolio_creation" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="investorID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Investors" Relationship="optimizerModel.FK_Portfolios_Investors" FromRole="Portfolios" ToRole="Investors" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
-      <PropertyRef Name="UserID" />
+      <PropertyRef Name="User_name" />
     </Key>
     <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="User_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_pwd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="User_isExpert" Type="Int32" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_Fname" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_Lname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_address" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
-  <EntityContainer Name="optimizerEntities" annotation:LazyLoadingEnabled="true">
+  <Association Name="FK_Assets_Companies">
+    <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+    <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Companies">
+        <PropertyRef Name="Company_symbol" />
+      </Principal>
+      <Dependent Role="Assets">
+        <PropertyRef Name="Company_symbol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="optimizerEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Assets" EntityType="Self.Assets" />
     <EntitySet Name="Companies" EntityType="Self.Companies" />
     <EntitySet Name="Currencies" EntityType="Self.Currencies" />
     <EntitySet Name="Investors" EntityType="Self.Investors" />
     <EntitySet Name="Portfolios" EntityType="Self.Portfolios" />
     <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Assets_Companies" Association="Self.FK_Assets_Companies">
+      <End Role="Companies" EntitySet="Companies" />
+      <End Role="Assets" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Portfolios_Investors" Association="optimizerModel.FK_Portfolios_Investors">
+      <End Role="Investors" EntitySet="Investors" />
+      <End Role="Portfolios" EntitySet="Portfolios" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Portfolios_Investors">
+    <End Type="optimizerModel.Investors" Role="Investors" Multiplicity="0..1" />
+    <End Type="optimizerModel.Portfolios" Role="Portfolios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Investors">
+        <PropertyRef Name="client_email" />
+      </Principal>
+      <Dependent Role="Portfolios">
+        <PropertyRef Name="investorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

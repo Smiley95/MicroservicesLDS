@@ -12,6 +12,7 @@ using PortfolioManager.Models;
 
 namespace PortfolioManager.Controllers
 {
+    [Authorize(Roles = "Expert")]
     public class InvestorsController : ApiController
     {
         private optimizerEntities db = new optimizerEntities();
@@ -37,14 +38,14 @@ namespace PortfolioManager.Controllers
 
         // PUT: api/Investors/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutInvestors(int id, Investors investors)
+        public IHttpActionResult PutInvestors(string id, Investors investors)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != investors.client_ID)
+            if (id != investors.client_email)
             {
                 return BadRequest();
             }
@@ -82,7 +83,7 @@ namespace PortfolioManager.Controllers
             db.Investors.Add(investors);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = investors.client_ID }, investors);
+            return CreatedAtRoute("DefaultApi", new { id = investors.client_email }, investors);
         }
 
         // DELETE: api/Investors/5
@@ -110,9 +111,9 @@ namespace PortfolioManager.Controllers
             base.Dispose(disposing);
         }
 
-        private bool InvestorsExists(int id)
+        private bool InvestorsExists(string id)
         {
-            return db.Investors.Count(e => e.client_ID == id) > 0;
+            return db.Investors.Count(e => e.client_email == id) > 0;
         }
     }
 }

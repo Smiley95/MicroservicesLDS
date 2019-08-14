@@ -12,6 +12,7 @@ using PortfolioManager.Models;
 
 namespace PortfolioManager.Controllers
 {
+ 
     public class UsersController : ApiController
     {
         private optimizerEntities db = new optimizerEntities();
@@ -19,14 +20,15 @@ namespace PortfolioManager.Controllers
         // GET: api/Users
         public IQueryable<Users> GetUsers()
         {
+
             return db.Users;
         }
 
         // GET: api/Users/5
         [ResponseType(typeof(Users))]
-        public IHttpActionResult GetUsers(int id)
+        public IHttpActionResult GetUsers(string userID)
         {
-            Users users = db.Users.Find(id);
+            Users users = db.Users.Find(userID);
             if (users == null)
             {
                 return NotFound();
@@ -34,17 +36,17 @@ namespace PortfolioManager.Controllers
 
             return Ok(users);
         }
-
+        
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUsers(int id, Users users)
+        public IHttpActionResult PutUsers(string id, Users users)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != users.UserID)
+            if (id != users.User_email)
             {
                 return BadRequest();
             }
@@ -82,7 +84,7 @@ namespace PortfolioManager.Controllers
             db.Users.Add(users);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = users.UserID }, users);
+            return CreatedAtRoute("DefaultApi", new { id = users.User_email}, users);
         }
 
         // DELETE: api/Users/5
@@ -110,9 +112,9 @@ namespace PortfolioManager.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UsersExists(int id)
+        private bool UsersExists(string id)
         {
-            return db.Users.Count(e => e.UserID == id) > 0;
+            return db.Users.Count(e => e.User_email== id) > 0;
         }
     }
 }

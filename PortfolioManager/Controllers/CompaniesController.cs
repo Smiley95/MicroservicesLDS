@@ -12,6 +12,7 @@ using PortfolioManager.Models;
 
 namespace PortfolioManager.Controllers
 {
+    [Authorize(Roles = "Expert")]
     public class CompaniesController : ApiController
     {
         private optimizerEntities db = new optimizerEntities();
@@ -24,9 +25,9 @@ namespace PortfolioManager.Controllers
 
         // GET: api/Companies/5
         [ResponseType(typeof(Companies))]
-        public IHttpActionResult GetCompanies(int id)
+        public IHttpActionResult GetCompanies(string symbol)
         {
-            Companies companies = db.Companies.Find(id);
+            Companies companies = db.Companies.Find(symbol);
             if (companies == null)
             {
                 return NotFound();
@@ -37,14 +38,14 @@ namespace PortfolioManager.Controllers
 
         // PUT: api/Companies/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCompanies(int id, Companies companies)
+        public IHttpActionResult PutCompanies(string symbol, Companies companies)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != companies.Company_ID)
+            if (symbol != companies.Company_symbol)
             {
                 return BadRequest();
             }
@@ -57,7 +58,7 @@ namespace PortfolioManager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CompaniesExists(id))
+                if (!CompaniesExists(symbol))
                 {
                     return NotFound();
                 }
@@ -82,12 +83,12 @@ namespace PortfolioManager.Controllers
             db.Companies.Add(companies);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = companies.Company_ID }, companies);
+            return CreatedAtRoute("DefaultApi", new { id = companies.Company_symbol }, companies);
         }
 
         // DELETE: api/Companies/5
         [ResponseType(typeof(Companies))]
-        public IHttpActionResult DeleteCompanies(int id)
+        public IHttpActionResult DeleteCompanies(string id)
         {
             Companies companies = db.Companies.Find(id);
             if (companies == null)
@@ -110,9 +111,9 @@ namespace PortfolioManager.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CompaniesExists(int id)
+        private bool CompaniesExists(string id)
         {
-            return db.Companies.Count(e => e.Company_ID == id) > 0;
+            return db.Companies.Count(e => e.Company_symbol == id) > 0;
         }
     }
 }

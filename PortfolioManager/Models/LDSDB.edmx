@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LDSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="Asset_ID" />
+          </Key>
+          <Property Name="Asset_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Asset_nbShare" Type="int" Nullable="false" />
+          <Property Name="Asset_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Asset_AQS_date" Type="date" Nullable="false" />
+          <Property Name="Asset_shareCost" Type="float" Nullable="false" />
+          <Property Name="Asset_currentValue" Type="float" Nullable="false" />
+          <Property Name="PortfolioID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company_symbol" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Company_symbol" />
+          </Key>
+          <Property Name="Company_symbol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company_sector" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company_type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company_capital" Type="float" Nullable="false" />
+          <Property Name="Company_totalNbrShares" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investor">
+          <Key>
+            <PropertyRef Name="Investor_ID" />
+          </Key>
+          <Property Name="Investor_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Investor_FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Investor_birth" Type="date" Nullable="false" />
+          <Property Name="Investor_timeHorizon" Type="date" Nullable="false" />
+          <Property Name="Investor_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Expert_ID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="Portfolio_ID" />
+          </Key>
+          <Property Name="Portfolio_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Portfolio_title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Portfolio_creationDate" Type="date" Nullable="false" />
+          <Property Name="Investor_ID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_email" />
+          </Key>
+          <Property Name="User_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_pwd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_address" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Asset_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Company_symbol" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="Company_symbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_Portfolio">
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1" />
+          <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="Portfolio_ID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Investor_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Investor" Type="Self.Investor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_email" />
+            </Principal>
+            <Dependent Role="Investor">
+              <PropertyRef Name="Expert_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Portfolio_Investor">
+          <End Role="Investor" Type="Self.Investor" Multiplicity="1" />
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investor">
+              <PropertyRef Name="Investor_ID" />
+            </Principal>
+            <Dependent Role="Portfolio">
+              <PropertyRef Name="Investor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LDSModelStoreContainer">
+          <EntitySet Name="Asset" EntityType="Self.Asset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investor" EntityType="Self.Investor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Portfolio" EntityType="Self.Portfolio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Asset_Company" Association="Self.FK_Asset_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_Portfolio" Association="Self.FK_Asset_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolio" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Investor_User" Association="Self.FK_Investor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Investor" EntitySet="Investor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Portfolio_Investor" Association="Self.FK_Portfolio_Investor">
+            <End Role="Investor" EntitySet="Investor" />
+            <End Role="Portfolio" EntitySet="Portfolio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LDSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="Asset_ID" />
+          </Key>
+          <Property Name="Asset_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Asset_nbShare" Type="Int32" Nullable="false" />
+          <Property Name="Asset_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Asset_AQS_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Asset_shareCost" Type="Double" Nullable="false" />
+          <Property Name="Asset_currentValue" Type="Double" Nullable="false" />
+          <Property Name="PortfolioID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Asset_Company" FromRole="Asset" ToRole="Company" />
+          <NavigationProperty Name="Portfolio" Relationship="Self.FK_Asset_Portfolio" FromRole="Asset" ToRole="Portfolio" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Company_symbol" />
+          </Key>
+          <Property Name="Company_symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_sector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company_capital" Type="Double" Nullable="false" />
+          <Property Name="Company_totalNbrShares" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asset" Relationship="Self.FK_Asset_Company" FromRole="Company" ToRole="Asset" />
+        </EntityType>
+        <EntityType Name="Investor">
+          <Key>
+            <PropertyRef Name="Investor_ID" />
+          </Key>
+          <Property Name="Investor_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Investor_FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Investor_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Investor_timeHorizon" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Investor_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Expert_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Investor_User" FromRole="Investor" ToRole="User" />
+          <NavigationProperty Name="Portfolio" Relationship="Self.FK_Portfolio_Investor" FromRole="Investor" ToRole="Portfolio" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="Portfolio_ID" />
+          </Key>
+          <Property Name="Portfolio_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Portfolio_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Portfolio_creationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Investor_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Asset" Relationship="Self.FK_Asset_Portfolio" FromRole="Portfolio" ToRole="Asset" />
+          <NavigationProperty Name="Investor" Relationship="Self.FK_Portfolio_Investor" FromRole="Portfolio" ToRole="Investor" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_email" />
+          </Key>
+          <Property Name="User_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Investor" Relationship="Self.FK_Investor_User" FromRole="User" ToRole="Investor" />
+        </EntityType>
+        <Association Name="FK_Asset_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Company_symbol" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="Company_symbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_Portfolio">
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="1" />
+          <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="Portfolio_ID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="PortfolioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Investor_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Investor" Type="Self.Investor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_email" />
+            </Principal>
+            <Dependent Role="Investor">
+              <PropertyRef Name="Expert_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Portfolio_Investor">
+          <End Role="Investor" Type="Self.Investor" Multiplicity="1" />
+          <End Role="Portfolio" Type="Self.Portfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investor">
+              <PropertyRef Name="Investor_ID" />
+            </Principal>
+            <Dependent Role="Portfolio">
+              <PropertyRef Name="Investor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LDSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asset" EntityType="Self.Asset" />
+          <EntitySet Name="Company" EntityType="Self.Company" />
+          <EntitySet Name="Investor" EntityType="Self.Investor" />
+          <EntitySet Name="Portfolio" EntityType="Self.Portfolio" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Asset_Company" Association="Self.FK_Asset_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_Portfolio" Association="Self.FK_Asset_Portfolio">
+            <End Role="Portfolio" EntitySet="Portfolio" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Investor_User" Association="Self.FK_Investor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Investor" EntitySet="Investor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Portfolio_Investor" Association="Self.FK_Portfolio_Investor">
+            <End Role="Investor" EntitySet="Investor" />
+            <End Role="Portfolio" EntitySet="Portfolio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LDSModelStoreContainer" CdmEntityContainer="LDSEntities">
+          <EntitySetMapping Name="Asset">
+            <EntityTypeMapping TypeName="LDSModel.Asset">
+              <MappingFragment StoreEntitySet="Asset">
+                <ScalarProperty Name="Asset_ID" ColumnName="Asset_ID" />
+                <ScalarProperty Name="Asset_nbShare" ColumnName="Asset_nbShare" />
+                <ScalarProperty Name="Asset_name" ColumnName="Asset_name" />
+                <ScalarProperty Name="Asset_AQS_date" ColumnName="Asset_AQS_date" />
+                <ScalarProperty Name="Asset_shareCost" ColumnName="Asset_shareCost" />
+                <ScalarProperty Name="Asset_currentValue" ColumnName="Asset_currentValue" />
+                <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
+                <ScalarProperty Name="Company_symbol" ColumnName="Company_symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="LDSModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Company_symbol" ColumnName="Company_symbol" />
+                <ScalarProperty Name="Company_name" ColumnName="Company_name" />
+                <ScalarProperty Name="Company_sector" ColumnName="Company_sector" />
+                <ScalarProperty Name="Company_type" ColumnName="Company_type" />
+                <ScalarProperty Name="Company_capital" ColumnName="Company_capital" />
+                <ScalarProperty Name="Company_totalNbrShares" ColumnName="Company_totalNbrShares" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investor">
+            <EntityTypeMapping TypeName="LDSModel.Investor">
+              <MappingFragment StoreEntitySet="Investor">
+                <ScalarProperty Name="Investor_ID" ColumnName="Investor_ID" />
+                <ScalarProperty Name="Investor_FullName" ColumnName="Investor_FullName" />
+                <ScalarProperty Name="Investor_birth" ColumnName="Investor_birth" />
+                <ScalarProperty Name="Investor_timeHorizon" ColumnName="Investor_timeHorizon" />
+                <ScalarProperty Name="Investor_email" ColumnName="Investor_email" />
+                <ScalarProperty Name="Expert_ID" ColumnName="Expert_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Portfolio">
+            <EntityTypeMapping TypeName="LDSModel.Portfolio">
+              <MappingFragment StoreEntitySet="Portfolio">
+                <ScalarProperty Name="Portfolio_ID" ColumnName="Portfolio_ID" />
+                <ScalarProperty Name="Portfolio_title" ColumnName="Portfolio_title" />
+                <ScalarProperty Name="Portfolio_creationDate" ColumnName="Portfolio_creationDate" />
+                <ScalarProperty Name="Investor_ID" ColumnName="Investor_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="LDSModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="User_name" ColumnName="User_name" />
+                <ScalarProperty Name="User_pwd" ColumnName="User_pwd" />
+                <ScalarProperty Name="User_email" ColumnName="User_email" />
+                <ScalarProperty Name="User_role" ColumnName="User_role" />
+                <ScalarProperty Name="User_address" ColumnName="User_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
