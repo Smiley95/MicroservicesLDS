@@ -2,18 +2,6 @@ import React from 'react';
 import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import './login.css';
 import HomePage from './homePage';
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBModalFooter,
-  MDBIcon,
-  MDBCardHeader,
-  MDBBtn,
-  MDBInput
-} from "mdbreact";
 
 class Login extends React.Component {
     constructor(props){
@@ -35,8 +23,7 @@ class Login extends React.Component {
     } 
     
     handleSubmit(e) {
-      e.preventDefault();
-
+      e.preventDefault(); 
       this.setState({ submitted: true });
       const { username, password } = this.state;
       if (!(username && password)) {
@@ -84,8 +71,43 @@ class Login extends React.Component {
       }
       else{
         return (
-          
-            <MDBContainer className="d-flex justify-content-center">
+          <div className="login-wrap">
+          <div className="login-html">
+            <form className="login-form" name="form" onSubmit={this.handleSubmit}>
+              <div className="sign-in-htm">
+                <div className="group">
+                  <label htmlFor="user" className="label">Username</label>
+                  <input id="user" type="text" className="input" value={this.state.username} onChange={this.handleChange}
+                    />
+                </div>
+                <div className="group">
+                  <label htmlFor="pass" className="label">Password</label>
+                  <input id="pass" type="password" className="input" data-type="password" value={this.state.password}
+                    onChange={this.handleChange}
+                    />
+                </div>
+                <div className="group">
+                  <input id="check" type="checkbox" className="check" checked/>
+                  <label htmlFor="check"><span className="icon"></span> Keep me Signed in</label>
+                </div>
+                <div className="group" >
+                  <button type="button" className="button" disabled={!(this.state.username && this.state.password)}>Sign In</button>
+                </div>
+                <div className="hr"></div>
+                <div className="foot-lnk">
+                  <a href="#forgot">Forgot Password?</a>
+                </div>
+              </div> 
+            </form>
+          </div>
+          </div>
+        );
+      }        
+    }
+}
+export default Login;
+/*
+<MDBContainer className="d-flex justify-content-center">
       <MDBRow>hello there {this.state.token}</MDBRow>
       <MDBRow >
         <MDBCol md="12">
@@ -154,8 +176,4 @@ class Login extends React.Component {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-      );    
-              }        
-      }
-}
-export default Login;
+*/

@@ -17,6 +17,7 @@ namespace LDSData.Controllers
     public class UsersController : ApiController
     {
         private IGenericRepository<User> repository = null;
+       
         public UsersController()
         {
             this.repository = new GenericRepository<User>();
@@ -43,6 +44,19 @@ namespace LDSData.Controllers
             }
 
             return Ok(user);
+        }
+        // GET: api/Users/
+        [HttpGet]
+        [ResponseType(typeof(string))]
+        public IHttpActionResult GetUserByName([FromUri]string username, [FromBody]string password)
+        {
+            IEnumerable<User> users = repository.GetAll().Where(c => (c.User_name.Equals(username) && c.User_pwd.Equals(password))).Select(e => e);
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(users);
         }
 
         // PUT: api/Users/5
