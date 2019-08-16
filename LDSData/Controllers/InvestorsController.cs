@@ -33,9 +33,8 @@ namespace LDSData.Controllers
             return repository.GetAll();
         }
 
-        // GET: api/Investors/idExpert
-        //[Route("GetInvestorsByExpert")]
-        [HttpGet]
+        // POST: api/Investors/idExpert
+        [HttpPost]
         [ResponseType(typeof(string))]
         public IHttpActionResult GetInvestorsByExpert([FromBody]string expertID)
         {

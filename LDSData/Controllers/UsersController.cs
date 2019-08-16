@@ -45,18 +45,18 @@ namespace LDSData.Controllers
 
             return Ok(user);
         }
-        // GET: api/Users/
-        [HttpGet]
+        // POST: api/Users/
+        [HttpPost]
         [ResponseType(typeof(string))]
         public IHttpActionResult GetUserByName([FromUri]string username, [FromBody]string password)
         {
-            IEnumerable<User> users = repository.GetAll().Where(c => (c.User_name.Equals(username) && c.User_pwd.Equals(password))).Select(e => e);
+            User users = repository.GetAll().FirstOrDefault(c => (c.User_name.Equals(username) && c.User_pwd.Equals(password)))/*.Select(e => e)*/;
             if (users == null)
             {
                 return NotFound();
             }
 
-            return Ok(users);
+            return Ok(users.User_email);
         }
 
         // PUT: api/Users/5
