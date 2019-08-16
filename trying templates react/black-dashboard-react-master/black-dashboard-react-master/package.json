@@ -4,10 +4,13 @@
   "private": true,
   "homepage": "https://creativetimofficial.github.io/black-dashboard-react/#/dashboard",
   "dependencies": {
+    "@bumaga/tabs": "^0.1.3",
+    "@material-ui/core": "^4.3.2",
     "@types/react": "16.4.16",
     "bootstrap": "4.1.3",
     "chart.js": "^2.7.2",
     "classnames": "2.2.6",
+    "framer-motion": "^1.6.2",
     "history": "4.7.2",
     "mdbreact": "^4.19.0",
     "node-sass": "4.9.3",

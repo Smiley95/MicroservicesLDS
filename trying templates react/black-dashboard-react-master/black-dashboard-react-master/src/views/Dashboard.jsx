@@ -20,7 +20,8 @@ import React from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
-
+//import { motion } from 'framer-motion'
+import HeightTabs from './tables'
 // reactstrap components
 import {
   Button,
@@ -55,7 +56,11 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       bigChartData: "data1",
-      clients : {}
+      username : this.props.username,
+      password : this.props.password,
+      expertID : '',
+      clients : [],
+      activeItem: "1"
     };
   }
   setBgChartData = name => {
@@ -64,21 +69,50 @@ class Dashboard extends React.Component {
     });
   };
   componentDidMount() {
-    console.log("token is "+this.props.token);
-    const requestOptions = {
-      method: 'GET',
-      headers : {Authorization : "Bearer " + this.props.token}
-      
+    const password = "\""+this.props.password + "\"";
+    const requestOptions1 = {
+      method: 'POST',
+      headers : {
+        Authorization : "Bearer " + this.props.token,
+        'Content-Type': 'application/json'
+      },
+      body:  password
+    }
+    
+    fetch('https://localhost:44334/api/Users/GetUserByName?username='+this.props.username,requestOptions1)
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({expertID : data})
+      const requestOptions2 = {
+        method: 'POST',
+        headers : {
+          Authorization : "Bearer " + this.props.token,
+          'Content-Type': 'application/json'
+        },
+        body : "\""+this.state.expertID+"\""      
+      }
+      fetch('https://localhost:44334/api/Investors/GetInvestorsByExpert',requestOptions2)
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({clients : data})
+        console.log(this.state.clients)
+      })
+      .catch(console.log)
+      })
+    .catch(console.log)
+  
   }
-  fetch('https://localhost:44334/api/Investors/GetInvestors',requestOptions)
-  .then(res => res.json())
-  .then((data) => {
-      console.log(this.props.token)
-      console.log(data)
-  })
-  .catch(console.log)
-  }
+  toggle = tab => e => {
+    if (this.state.activeItem !== tab) {
+      this.setState({
+        activeItem: tab
+      });
+    }
+  };
+
   render() {
+
+
     return (
       <>
         <div className="content">
@@ -237,11 +271,14 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           <Row>
+          <HeightTabs />
+          </Row>
+          <Row>
             <Col lg="6" md="12">
               <Card className="card-tasks">
                 <CardHeader>
-                  <h6 className="title d-inline">Tasks(5)</h6>
-                  <p className="card-category d-inline"> today</p>
+                  <h6 className="title d-inline">Porftolios</h6>
+                  <p className="card-category d-inline"> per client</p>
                   <UncontrolledDropdown>
                     <DropdownToggle
                       caret
@@ -277,228 +314,23 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="table-full-width table-responsive">
                     <Table>
-                      <tbody>
+                      <thead className="text-primary">
                         <tr>
-                          <td>
-                            <FormGroup check>
-                              <Label check>
-                                <Input defaultValue="" type="checkbox" />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <p className="title">Update the Documentation</p>
-                            <p className="text-muted">
-                              Dwuamish Head, Seattle, WA 8:47 AM
-                            </p>
-                          </td>
-                          <td className="td-actions text-right">
-                            <Button
-                              color="link"
-                              id="tooltip636901683"
-                              title=""
-                              type="button"
-                            >
-                              <i className="tim-icons icon-pencil" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              target="tooltip636901683"
-                              placement="right"
-                            >
-                              Edit Task
-                            </UncontrolledTooltip>
-                          </td>
+                          <th>Title</th>
+                          <th>Created on </th>
                         </tr>
-                        <tr>
-                          <td>
-                            <FormGroup check>
-                              <Label check>
-                                <Input
-                                  defaultChecked
-                                  defaultValue=""
-                                  type="checkbox"
-                                />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <p className="title">GDPR Compliance</p>
-                            <p className="text-muted">
-                              The GDPR is a regulation that requires businesses
-                              to protect the personal data and privacy of Europe
-                              citizens for transactions that occur within EU
-                              member states.
-                            </p>
-                          </td>
-                          <td className="td-actions text-right">
-                            <Button
-                              color="link"
-                              id="tooltip457194718"
-                              title=""
-                              type="button"
-                            >
-                              <i className="tim-icons icon-pencil" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              target="tooltip457194718"
-                              placement="right"
-                            >
-                              Edit Task
-                            </UncontrolledTooltip>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <FormGroup check>
-                              <Label check>
-                                <Input defaultValue="" type="checkbox" />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <p className="title">Solve the issues</p>
-                            <p className="text-muted">
-                              Fifty percent of all respondents said they would
-                              be more likely to shop at a company
-                            </p>
-                          </td>
-                          <td className="td-actions text-right">
-                            <Button
-                              color="link"
-                              id="tooltip362404923"
-                              title=""
-                              type="button"
-                            >
-                              <i className="tim-icons icon-pencil" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              target="tooltip362404923"
-                              placement="right"
-                            >
-                              Edit Task
-                            </UncontrolledTooltip>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <FormGroup check>
-                              <Label check>
-                                <Input defaultValue="" type="checkbox" />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <p className="title">Release v2.0.0</p>
-                            <p className="text-muted">
-                              Ra Ave SW, Seattle, WA 98116, SUA 11:19 AM
-                            </p>
-                          </td>
-                          <td className="td-actions text-right">
-                            <Button
-                              color="link"
-                              id="tooltip818217463"
-                              title=""
-                              type="button"
-                            >
-                              <i className="tim-icons icon-pencil" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              target="tooltip818217463"
-                              placement="right"
-                            >
-                              Edit Task
-                            </UncontrolledTooltip>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <FormGroup check>
-                              <Label check>
-                                <Input defaultValue="" type="checkbox" />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <p className="title">Export the processed files</p>
-                            <p className="text-muted">
-                              The report also shows that consumers will not
-                              easily forgive a company once a breach exposing
-                              their personal data occurs.
-                            </p>
-                          </td>
-                          <td className="td-actions text-right">
-                            <Button
-                              color="link"
-                              id="tooltip831835125"
-                              title=""
-                              type="button"
-                            >
-                              <i className="tim-icons icon-pencil" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              target="tooltip831835125"
-                              placement="right"
-                            >
-                              Edit Task
-                            </UncontrolledTooltip>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <FormGroup check>
-                              <Label check>
-                                <Input defaultValue="" type="checkbox" />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <p className="title">Arival at export process</p>
-                            <p className="text-muted">
-                              Capitol Hill, Seattle, WA 12:34 AM
-                            </p>
-                          </td>
-                          <td className="td-actions text-right">
-                            <Button
-                              color="link"
-                              id="tooltip217595172"
-                              title=""
-                              type="button"
-                            >
-                              <i className="tim-icons icon-pencil" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              target="tooltip217595172"
-                              placement="right"
-                            >
-                              Edit Task
-                            </UncontrolledTooltip>
-                          </td>
-                        </tr>
-                      </tbody>
+                      </thead>
+                      <tbody>{this.state.clients.map(function(item) {
+                            return (
+                              item.Portfolio.map(function(port, key){
+                                return (
+                                <tr key = {key}>
+                                  <td>{port.Portfolio_title}</td>
+                                  <td>{port.Portfolio_creationDate}</td>
+                              </tr>)
+                              })  
+                            )
+                      })}</tbody>
                     </Table>
                   </div>
                 </CardBody>
@@ -513,56 +345,22 @@ class Dashboard extends React.Component {
                   <Table className="tablesorter" responsive>
                     <thead className="text-primary">
                       <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-center">Salary</th>
+                        <th>Full name</th>
+                        <th>Email </th>
+                        <th>Birth</th>
+                        <th>Time horizon</th>      
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>Dakota Rice</td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                        <td className="text-center">$36,738</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td className="text-center">$23,789</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-center">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-center">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-center">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$98,615</td>
-                      </tr>
-                    </tbody>
+                    <tbody>{this.state.clients.map(function(item, key) {
+                      return (
+                          <tr key = {key}>
+                              <td>{item.Investor_FullName}</td>
+                              <td>{item.Investor_email}</td>
+                              <td>{item.Investor_timeHorizon}</td>
+                              <td>{item.Investor_birth}</td>
+                          </tr>
+                        )
+                    })}</tbody>
                   </Table>
                 </CardBody>
               </Card>

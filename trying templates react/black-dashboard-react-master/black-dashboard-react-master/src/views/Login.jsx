@@ -54,13 +54,9 @@ class Login extends React.Component {
         }
         else{
           this.setState({ token: data['access_token'] })
-          console.log(this.state.token);
         }
-        
-        
       })
       .catch(console.log)
-      
   }
 
     render() {
