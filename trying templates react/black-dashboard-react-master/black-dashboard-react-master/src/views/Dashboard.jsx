@@ -20,8 +20,8 @@ import React from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
-//import { motion } from 'framer-motion'
 import HeightTabs from './tables'
+//import { motion } from 'framer-motion'
 // reactstrap components
 import {
   Button,
@@ -271,9 +271,6 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           <Row>
-          <HeightTabs />
-          </Row>
-          <Row>
             <Col lg="6" md="12">
               <Card className="card-tasks">
                 <CardHeader>
@@ -365,6 +362,9 @@ class Dashboard extends React.Component {
                 </CardBody>
               </Card>
             </Col>
+          </Row>
+          <Row>
+          <HeightTabs />
           </Row>
         </div>
       </>
