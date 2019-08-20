@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, cloneElement } from 'react'
 import { Tabs, useTabState, Panel } from '@bumaga/tabs'
-import { motion } from 'framer-motion'
+//import { motion } from 'framer-motion'
 
-const cn = (...args) => args.filter(Boolean).join(' ')
+/*const cn = (...args) => args.filter(Boolean).join(' ')
 
 const Tab = ({ children }) => {
   const { isActive, onClick } = useTabState()
@@ -24,11 +24,11 @@ const PanelList = ({ state, children }) => {
   }, [activeIndex, set])
 
   return (
-    <motion.div animate={{ height }} style={{ overflow: 'hidden' }}>
+    //<motion.div animate={{ height }} style={{ overflow: 'hidden' }}>
       <div ref={panelRef}>
         {cloneElement(children[activeIndex], { active: true })}
       </div>
-    </motion.div>
+    //</motion.div>
   )
 }
 
@@ -82,4 +82,4 @@ export default () => {
       </div>
     </Tabs>
   )
-}
+}*/

@@ -90,8 +90,11 @@ C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\System.Web.Razor.resources.
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\System.Web.WebPages.resources.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\System.Web.WebPages.Deployment.resources.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\System.Web.WebPages.Razor.resources.dll
-C:\Users\ETaieb\Desktop\project\ReturnService\obj\Debug\ReturnService.csprojAssemblyReference.cache
 C:\Users\ETaieb\Desktop\project\ReturnService\obj\Debug\ReturnService.csproj.CoreCompileInputs.cache
 C:\Users\ETaieb\Desktop\project\ReturnService\obj\Debug\ReturnService.csproj.CopyComplete
 C:\Users\ETaieb\Desktop\project\ReturnService\obj\Debug\ReturnService.dll
 C:\Users\ETaieb\Desktop\project\ReturnService\obj\Debug\ReturnService.pdb
+C:\Users\ETaieb\Desktop\project\ReturnService\bin\Json.Net.dll
+C:\Users\ETaieb\Desktop\project\ReturnService\bin\Json.NET.Web.dll
+C:\Users\ETaieb\Desktop\project\ReturnService\bin\fr\EntityFramework.SqlServer.resources.dll
+C:\Users\ETaieb\Desktop\project\ReturnService\obj\Debug\ReturnService.csprojAssemblyReference.cache

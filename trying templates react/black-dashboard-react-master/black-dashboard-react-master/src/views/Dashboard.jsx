@@ -20,7 +20,7 @@ import React from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
-import HeightTabs from './tables'
+//import HeightTabs from './tables'
 //import { motion } from 'framer-motion'
 // reactstrap components
 import {
@@ -70,6 +70,22 @@ class Dashboard extends React.Component {
   };
   componentDidMount() {
     const password = "\""+this.props.password + "\"";
+    //test roe
+    const requestOptions = {
+      method: 'GET',
+      mode: 'no-cors',
+      headers : {
+        'Content-Type': 'application/json'
+      }
+    }
+    fetch('https://localhost:44322/api/Returns/GetReturn',requestOptions)
+      .then(res => res.json())
+      .then((data) => {
+        console.log(data)
+      })
+      .catch(console.log)
+    //end of test
+    
     const requestOptions1 = {
       method: 'POST',
       headers : {
@@ -364,7 +380,7 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           <Row>
-          <HeightTabs />
+          <div />
           </Row>
         </div>
       </>

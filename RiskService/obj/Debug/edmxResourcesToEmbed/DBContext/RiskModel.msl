@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LDSModelStoreContainer" CdmEntityContainer="LDSEntities">
+    <EntitySetMapping Name="Risk">
+      <EntityTypeMapping TypeName="LDSModel.Risk">
+        <MappingFragment StoreEntitySet="Risk">
+          <ScalarProperty Name="Risk_ID" ColumnName="Risk_ID" />
+          <ScalarProperty Name="Risk_Type" ColumnName="Risk_Type" />
+          <ScalarProperty Name="Risk_value" ColumnName="Risk_value" />
+          <ScalarProperty Name="Risk_estimationDate" ColumnName="Risk_estimationDate" />
+          <ScalarProperty Name="Asset_ID" ColumnName="Asset_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

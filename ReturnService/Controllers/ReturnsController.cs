@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Description;
 using ReturnService.DBContext;
@@ -19,10 +20,10 @@ namespace ReturnService.Controllers
         private LDSEntities db = new LDSEntities();
 
         // GET: api/Returns
-        public string GetReturn()
+        public IHttpActionResult GetReturns(string companySymbol)
         {
-            string claimTerms = HttpHelper.GetCompanyFinancialState();
-            return claimTerms;
+            double claimTerms = HttpHelper.GetCompanyFinancialState(companySymbol);
+            return Ok(claimTerms);
         }
 
         // GET: api/Returns/5

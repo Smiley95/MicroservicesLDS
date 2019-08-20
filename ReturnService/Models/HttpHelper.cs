@@ -26,42 +26,28 @@ namespace ReturnService.Models
             }
         }*/
 
-        public static string GetCompanyFinancialState()
+        public static double GetCompanyFinancialState(string companySymbol)
         {
-            using (var client = new HttpClient())
+            double netIncome, totalAsset;
+            using (var clientIncome = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://financialmodelingprep.com");
-                var result =  client.GetAsync("/api/v3/company-key-metrics/AAPL").Result;
-                result.EnsureSuccessStatusCode();
-                string resultContentString = result.Content.ReadAsStringAsync().Result;
-
-                if (isJson(resultContentString))
-                {
-
-                    //resultContentString = resultContentString.Replace("[", "\"[").Replace("]", "]\"").Replace("\"","'").Replace(" ", "");
-                    
-                    return resultContentString;
-                    //return "json array ";
-                }
-                else {
-                    return "this is not a json array";
-                }
-                //string resultContent = JsonConvert.DeserializeObject<string>(resultContentString);
-                //return resultContentString;
+                clientIncome.BaseAddress = new Uri("https://financialmodelingprep.com");
+                var resultIncome = clientIncome.GetAsync("/api/v3/financials/income-statement/"+ companySymbol).Result;
+                resultIncome.EnsureSuccessStatusCode();
+                string resultIncomeString = resultIncome.Content.ReadAsStringAsync().Result;
+                JObject resultIncomeContent = JObject.Parse(resultIncomeString);
+                netIncome = Convert.ToDouble(resultIncomeContent["financials"][0]["Net Income"]);
             }
-        }
-
-        static bool isJson(string stringValue)
-        {
-            try
+            using (var clientAsset = new HttpClient())
             {
-                var json = JContainer.Parse(stringValue);
-                return true;
+                clientAsset.BaseAddress = new Uri("https://financialmodelingprep.com");
+                var resultAsset = clientAsset.GetAsync("api/v3/financials/balance-sheet-statement/"+ companySymbol).Result;
+                resultAsset.EnsureSuccessStatusCode();
+                string resultAssetString = resultAsset.Content.ReadAsStringAsync().Result;
+                JObject resultAssetContent = JObject.Parse(resultAssetString);
+                totalAsset = Convert.ToDouble(resultAssetContent["financials"][0]["Total assets"]);
             }
-            catch
-            {
-                return false;
-            }
+            return netIncome / totalAsset;
         }
     }
 }
