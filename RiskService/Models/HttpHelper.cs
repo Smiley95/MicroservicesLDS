@@ -23,5 +23,19 @@ namespace RiskService.Models
             }
             return BetaRisk;
         }
+        public static double GetStandardDeviationRisk(string companySymbol)
+        {
+            double BetaRisk;
+            using (var clientBeta = new HttpClient())
+            {
+                clientBeta.BaseAddress = new Uri("https://financialmodelingprep.com");
+                var resultBeta = clientBeta.GetAsync("/api/v3/company/profile/" + companySymbol).Result;
+                resultBeta.EnsureSuccessStatusCode();
+                string resultBetaString = resultBeta.Content.ReadAsStringAsync().Result;
+                JObject resultBetaContent = JObject.Parse(resultBetaString);
+                BetaRisk = Convert.ToDouble(resultBetaContent["profile"]["beta"]);
+            }
+            return BetaRisk;
+        }
     }
 }
