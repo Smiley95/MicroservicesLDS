@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using RiskService.DBContext;
+using Newtonsoft.Json.Linq;
 using RiskService.Models;
 
 namespace RiskService.Controllers
@@ -27,8 +28,12 @@ namespace RiskService.Controllers
             double claimTerms = HttpHelper.GetBetaRisk(companySymbol);
             return Ok(claimTerms);
         }
-        //https://www.investopedia.com/ask/answers/041415/what-are-some-common-measures-risk-used-risk-management.asp for other type of risks 
-        //https://www.businessmanagementideas.com/investment/risk-and-return-investment/risk-and-return-on-single-asset-investments-financial-management/16110 to estimate the risk 
+        public IHttpActionResult GetRiskStandDev(string companySymbol,int nbYears)
+        {
+            double claimTerms = HttpHelper.GetStandardDeviationRisk(companySymbol, nbYears);
+            return Ok(claimTerms);
+        }
+        
         // GET: api/Risks/5
         [ResponseType(typeof(Risk))]
         public IHttpActionResult GetRisk(string id)

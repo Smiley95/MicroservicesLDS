@@ -91,7 +91,6 @@ C:\Users\ETaieb\Desktop\project\RiskService\bin\fr\System.Web.Razor.resources.dl
 C:\Users\ETaieb\Desktop\project\RiskService\bin\fr\System.Web.WebPages.resources.dll
 C:\Users\ETaieb\Desktop\project\RiskService\bin\fr\System.Web.WebPages.Deployment.resources.dll
 C:\Users\ETaieb\Desktop\project\RiskService\bin\fr\System.Web.WebPages.Razor.resources.dll
-C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.csprojAssemblyReference.cache
 C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.csproj.CoreCompileInputs.cache
 C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.csproj.CopyComplete
 C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.dll
