@@ -6,11 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="a70309a28d824ff7b4f8a5a6930b2652" Name="Diagram1">
         <EntityTypeShape EntityType="LDSModel.Asset" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="LDSModel.Company" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="LDSModel.Investor" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="LDSModel.Portfolio" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="LDSModel.User" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="LDSModel.FK_Asset_Company" ManuallyRouted="false" />
         <AssociationConnector Association="LDSModel.FK_Asset_Portfolio" ManuallyRouted="false" />
         <AssociationConnector Association="LDSModel.FK_Investor_User" ManuallyRouted="false" />
         <AssociationConnector Association="LDSModel.FK_Portfolio_Investor" ManuallyRouted="false" />

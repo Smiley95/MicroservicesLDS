@@ -9,7 +9,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LDSData.DBContext;
+using LDSData.Models;
 using LDSData.Repositories;
+using Newtonsoft.Json.Linq;
 
 namespace LDSData.Controllers
 {
@@ -42,6 +44,32 @@ namespace LDSData.Controllers
                 return NotFound();
             }
 
+            return Ok(portfolio);
+        }
+        public IHttpActionResult GetPortfolioReturn(string id)
+        {
+            Portfolio portfolio = repository.GetById(id);
+            if (portfolio == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                using (var clientPortfolioReturn = new HttpClient())
+                {
+                    clientPortfolioReturn.BaseAddress = new Uri("https://localhost:44322");
+                    foreach (Asset asset in portfolio.Asset)
+                    {
+                        var PortfolioReturn = clientPortfolioReturn.GetAsync("/api/Returns/GetReturns?companySymbol=" + asset).Result;
+                        PortfolioReturn.EnsureSuccessStatusCode();
+                        string resultIncomeString = PortfolioReturn.Content.ReadAsStringAsync().Result;
+                        JObject resultIncomeContent = JObject.Parse(resultIncomeString);
+                        //netIncome = Convert.ToDouble(resultIncomeContent["financials"][0]["Net Income"]);
+                    }
+                }
+                //double claimTerms = HttpHelper.GetReturn(id);
+                //return Ok(claimTerms);
+            }
             return Ok(portfolio);
         }
 

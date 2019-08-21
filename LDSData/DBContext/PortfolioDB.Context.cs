@@ -26,7 +26,6 @@ namespace LDSData.DBContext
         }
     
         public virtual DbSet<Asset> Asset { get; set; }
-        public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<Investor> Investor { get; set; }
         public virtual DbSet<Portfolio> Portfolio { get; set; }
         public virtual DbSet<User> User { get; set; }

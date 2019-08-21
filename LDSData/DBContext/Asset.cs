@@ -14,16 +14,14 @@ namespace LDSData.DBContext
     
     public partial class Asset
     {
-        public string Asset_ID { get; set; }
+        public string Company_symbol { get; set; }
         public int Asset_nbShare { get; set; }
         public string Asset_name { get; set; }
         public System.DateTime Asset_AQS_date { get; set; }
         public double Asset_shareCost { get; set; }
         public double Asset_currentValue { get; set; }
         public string PortfolioID { get; set; }
-        public string Company_symbol { get; set; }
     
-        public virtual Company Company { get; set; }
         public virtual Portfolio Portfolio { get; set; }
     }
 }

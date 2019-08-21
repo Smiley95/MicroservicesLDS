@@ -46,6 +46,7 @@ namespace RiskService.Controllers
 
             return Ok(risk);
         }
+        //https://www.businessmanagementideas.com/investment/risk-and-return-investment/risk-and-return-on-single-asset-investments-financial-management/16110
 
         // PUT: api/Risks/5
         [ResponseType(typeof(void))]

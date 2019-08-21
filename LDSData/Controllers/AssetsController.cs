@@ -63,7 +63,7 @@ namespace LDSData.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != asset.Asset_ID)
+            if (id != asset.Company_symbol)
             {
                 return BadRequest();
             }
@@ -106,7 +106,7 @@ namespace LDSData.Controllers
             }
             catch (DbUpdateException)
             {
-                if (AssetExists(asset.Asset_ID))
+                if (AssetExists(asset.Company_symbol))
                 {
                     return Conflict();
                 }
@@ -116,7 +116,7 @@ namespace LDSData.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = asset.Asset_ID }, asset);
+            return CreatedAtRoute("DefaultApi", new { id = asset.Company_symbol }, asset);
         }
 
         // DELETE: api/Assets/5

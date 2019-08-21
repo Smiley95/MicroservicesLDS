@@ -4,26 +4,13 @@
     <EntitySetMapping Name="Asset">
       <EntityTypeMapping TypeName="LDSModel.Asset">
         <MappingFragment StoreEntitySet="Asset">
-          <ScalarProperty Name="Asset_ID" ColumnName="Asset_ID" />
+          <ScalarProperty Name="Company_symbol" ColumnName="Company_symbol" />
           <ScalarProperty Name="Asset_nbShare" ColumnName="Asset_nbShare" />
           <ScalarProperty Name="Asset_name" ColumnName="Asset_name" />
           <ScalarProperty Name="Asset_AQS_date" ColumnName="Asset_AQS_date" />
           <ScalarProperty Name="Asset_shareCost" ColumnName="Asset_shareCost" />
           <ScalarProperty Name="Asset_currentValue" ColumnName="Asset_currentValue" />
           <ScalarProperty Name="PortfolioID" ColumnName="PortfolioID" />
-          <ScalarProperty Name="Company_symbol" ColumnName="Company_symbol" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Company">
-      <EntityTypeMapping TypeName="LDSModel.Company">
-        <MappingFragment StoreEntitySet="Company">
-          <ScalarProperty Name="Company_symbol" ColumnName="Company_symbol" />
-          <ScalarProperty Name="Company_name" ColumnName="Company_name" />
-          <ScalarProperty Name="Company_sector" ColumnName="Company_sector" />
-          <ScalarProperty Name="Company_type" ColumnName="Company_type" />
-          <ScalarProperty Name="Company_capital" ColumnName="Company_capital" />
-          <ScalarProperty Name="Company_totalNbrShares" ColumnName="Company_totalNbrShares" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
