@@ -107,3 +107,6 @@ C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.dll
 C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.pdb
 C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\EntityFramework.resources.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\EntityFramework.SqlServer.resources.dll
+C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.csprojAssemblyReference.cache
+C:\Users\ETaieb\Desktop\project\LDSData\bin\MathNet.Numerics.dll
+C:\Users\ETaieb\Desktop\project\LDSData\bin\MathNet.Numerics.xml

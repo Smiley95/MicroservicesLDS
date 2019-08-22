@@ -95,3 +95,4 @@ C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.csproj.CoreCom
 C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.csproj.CopyComplete
 C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.dll
 C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.pdb
+C:\Users\ETaieb\Desktop\project\RiskService\obj\Debug\RiskService.csprojAssemblyReference.cache

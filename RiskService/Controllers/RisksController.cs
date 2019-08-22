@@ -18,23 +18,32 @@ namespace RiskService.Controllers
     {
         private LDSEntities db = new LDSEntities();
 
-        // GET: api/Risks
+        // GET: api/Risks/GetRisk
         public IQueryable<Risk> GetRisk()
         {
             return db.Risk;
         }
+        // GET: api/Risks/GetRiskBeta?companySymbol=AAPL
         public IHttpActionResult GetRiskBeta(string companySymbol)
         {
             double claimTerms = HttpHelper.GetBetaRisk(companySymbol);
             return Ok(claimTerms);
         }
+        // GET: api/Risks/GetRiskStandDev?companySymbol=AAPL&nbYears=5
         public IHttpActionResult GetRiskStandDev(string companySymbol,int nbYears)
         {
             double claimTerms = HttpHelper.GetStandardDeviationRisk(companySymbol, nbYears);
             return Ok(claimTerms);
         }
-        
-        // GET: api/Risks/5
+
+        // GET: api/Risks/GetMinRiskStandDev?companySymbol=AAPL
+        public IHttpActionResult GetMinRiskStandDev(string companySymbol)
+        {
+            double claimTerms = HttpHelper.GetStandardDeviationRisk(companySymbol);
+            return Ok(claimTerms);
+        }
+
+        // GET: api/Risks/GetRisk?id=5
         [ResponseType(typeof(Risk))]
         public IHttpActionResult GetRisk(string id)
         {
@@ -46,7 +55,6 @@ namespace RiskService.Controllers
 
             return Ok(risk);
         }
-        //https://www.businessmanagementideas.com/investment/risk-and-return-investment/risk-and-return-on-single-asset-investments-financial-management/16110
 
         // PUT: api/Risks/5
         [ResponseType(typeof(void))]

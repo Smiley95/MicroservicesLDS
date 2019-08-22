@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using LDSData.DBContext;
 using LDSData.Models;
 using LDSData.Repositories;
+using MathNet.Numerics.Statistics;
 using Newtonsoft.Json.Linq;
 
 namespace LDSData.Controllers
@@ -28,13 +29,13 @@ namespace LDSData.Controllers
         {
             this.repository = repository;
         }
-        // GET: api/Portfolios
+        // GET: api/Portfolios/GetPortfolio
         public IEnumerable<Portfolio> GetPortfolio()
         {
             return repository.GetAll();
         }
 
-        // GET: api/Portfolios/5
+        // GET: api/Portfolios/GetPortfolio?id=5
         [ResponseType(typeof(Portfolio))]
         public IHttpActionResult GetPortfolio(string id)
         {
@@ -46,6 +47,8 @@ namespace LDSData.Controllers
 
             return Ok(portfolio);
         }
+
+        // GET: api/Portfolios/GetPortfolioReturn?id=5
         public IHttpActionResult GetPortfolioReturn(string id)
         {
             Portfolio portfolio = repository.GetById(id);
@@ -55,22 +58,86 @@ namespace LDSData.Controllers
             }
             else
             {
+                JArray assetsReturns= new JArray();
+                double PReturn=0,summAsset=0;
                 using (var clientPortfolioReturn = new HttpClient())
                 {
                     clientPortfolioReturn.BaseAddress = new Uri("https://localhost:44322");
                     foreach (Asset asset in portfolio.Asset)
                     {
-                        var PortfolioReturn = clientPortfolioReturn.GetAsync("/api/Returns/GetReturns?companySymbol=" + asset).Result;
+                        summAsset = +asset.Asset_nbShare;
+                        var PortfolioReturn = clientPortfolioReturn.GetAsync("/api/Returns/GetReturns?companySymbol=" + asset.Company_symbol).Result;
                         PortfolioReturn.EnsureSuccessStatusCode();
-                        string resultIncomeString = PortfolioReturn.Content.ReadAsStringAsync().Result;
-                        JObject resultIncomeContent = JObject.Parse(resultIncomeString);
-                        //netIncome = Convert.ToDouble(resultIncomeContent["financials"][0]["Net Income"]);
+                        string AssetsReturnString = PortfolioReturn.Content.ReadAsStringAsync().Result;
+                        assetsReturns.Add(AssetsReturnString);
+                    }
+                    for (int i =0; i< portfolio.Asset.Count();i++)
+                    {
+                        PReturn = PReturn + (Convert.ToDouble(assetsReturns[i]) * (Convert.ToDouble(portfolio.Asset.ElementAt(i).Asset_nbShare) / summAsset));
+                    }
+
+                }
+                return Ok(PReturn);
+            }
+        }
+
+        // GET: api/Portfolios/GetPortfolioMarketRisk?id=5
+        public IHttpActionResult GetPortfolioMarketRisk(string id)
+        {
+            Portfolio portfolio = repository.GetById(id);
+            if (portfolio == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                JArray assetsBetaRisk = new JArray();
+                double PBetaRisk = 0, summAsset = 0;
+                using (var clientPortfolioBetaRisk = new HttpClient())
+                {
+                    clientPortfolioBetaRisk.BaseAddress = new Uri("https://localhost:44330");
+                    foreach (Asset asset in portfolio.Asset)
+                    {
+                        summAsset = +asset.Asset_nbShare;
+                        var assetBetaRisk = clientPortfolioBetaRisk.GetAsync("/api/Risks/GetRiskBeta?companySymbol=" + asset.Company_symbol).Result;
+                        assetBetaRisk.EnsureSuccessStatusCode();
+                        string assetBetaRiskString = assetBetaRisk.Content.ReadAsStringAsync().Result;
+                        assetsBetaRisk.Add(assetBetaRiskString);
+                    }
+                    for (int i = 0; i < portfolio.Asset.Count(); i++)
+                    {
+                        PBetaRisk = PBetaRisk + (Convert.ToDouble(assetsBetaRisk[i]) * (Convert.ToDouble(portfolio.Asset.ElementAt(i).Asset_nbShare) / summAsset));
+                    }
+
+                }
+                return Ok(PBetaRisk);
+            }
+        }
+        // GET: api/Portfolios/GetPortfolioMarketRisk?id=5
+        public IHttpActionResult GetPortfolioVarianceRisk(string id)
+        {
+            Portfolio portfolio = repository.GetById(id);
+            if (portfolio == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                double summAsset = 0;
+                double res = 0;
+                List<List<double>> correlation = getCorrelation(portfolio);
+                foreach (Asset asset in portfolio.Asset)
+                {
+                    summAsset = +asset.Asset_nbShare;
+                }
+                for (int i=0;i<portfolio.Asset.Count;i++) {
+                    for (int j= 0; j < portfolio.Asset.Count; j++)
+                    {
+                        res =+(portfolio.Asset.ElementAt(i).Asset_nbShare / summAsset) * (portfolio.Asset.ElementAt(j).Asset_nbShare / summAsset)* HttpHelper.GetAssetVar(portfolio.Asset.ElementAt(i).Company_symbol)* HttpHelper.GetAssetVar(portfolio.Asset.ElementAt(j).Company_symbol)*correlation.ElementAt(i).ElementAt(j);
                     }
                 }
-                //double claimTerms = HttpHelper.GetReturn(id);
-                //return Ok(claimTerms);
+                return Ok(res);
             }
-            return Ok(portfolio);
         }
 
         // GET: api/GetPortfoliosByInvestor
@@ -81,7 +148,7 @@ namespace LDSData.Controllers
             return Ok(repository.GetAll().Where(c => c.Investor_ID.Equals(InvestorID)).Select(e => e));
         }
 
-        // PUT: api/Portfolios/5
+        // PUT: api/Portfolios/PutPortfolio?id=5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPortfolio(string id, Portfolio portfolio)
         {
@@ -116,7 +183,7 @@ namespace LDSData.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Portfolios
+        // POST: api/Portfolios/PostPortfolio
         [ResponseType(typeof(Portfolio))]
         public IHttpActionResult PostPortfolio(Portfolio portfolio)
         {
@@ -146,7 +213,7 @@ namespace LDSData.Controllers
             return CreatedAtRoute("DefaultApi", new { id = portfolio.Portfolio_ID }, portfolio);
         }
 
-        // DELETE: api/Portfolios/5
+        // DELETE: api/Portfolios/DeletePortfolio?id=5
         [ResponseType(typeof(Portfolio))]
         public IHttpActionResult DeletePortfolio(string id)
         {
@@ -174,6 +241,51 @@ namespace LDSData.Controllers
         private bool PortfolioExists(string id)
         {
             return repository.GetById(id) != null ? true : false;
+        }
+        private List<List<double>> getCorrelation(Portfolio portfolio)
+        {
+            List<double> means = new List<double>();
+            List<List<double>> pow2 = new List<List<double>>();
+            List<List<double>> correlation = new List<List<double>>();
+            List<List<double>> history = new List<List<double>>();
+            List<List<double>> diff = new List<List<double>>();
+            //calculate mean for each asset's price's history
+            for (int i = 0;i < portfolio.Asset.Count();i++)
+            {
+                history.Add(HttpHelper.GetPriceHist(portfolio.Asset.ElementAt(i).Company_symbol));
+                means.Add(HttpHelper.GetPriceHist(portfolio.Asset.ElementAt(i).Company_symbol).Mean());
+            }
+            //calculate each asset^2
+            for (int i = 0; i < history.Count(); i++)
+            {
+                List<double> temp1 = new List<double>();
+                List<double> temp2 = new List<double>();
+                for (int j=0; j<history.ElementAt(i).Count(); j++)
+                {
+                    temp1.Add(history.ElementAt(i).ElementAt(j)-means.ElementAt(i));
+                    temp2.Add(Math.Pow(history.ElementAt(i).ElementAt(j) - means.ElementAt(i), 2));
+                }
+                diff.Add(temp1);
+                pow2.Add(temp2);
+            }
+
+            for (int i = 0; i < portfolio.Asset.Count(); i++)
+            {
+                List<double> temp = new List<double>();
+                for (int j = 0; j < portfolio.Asset.Count(); j++)
+                {
+                    double nominator = 0;
+                    double denominator = 0;
+                    for (int ki = 0; ki < diff.ElementAt(j).Count(); ki++)
+                    {
+                        nominator = +diff.ElementAt(i).ElementAt(ki) * diff.ElementAt(j).ElementAt(ki);
+                    }
+                    denominator = Math.Sqrt(pow2.ElementAt(i).Sum() * pow2.ElementAt(j).Sum());
+                    temp.Add(nominator/denominator);
+                }
+                correlation.Add(temp);
+            }
+            return correlation;
         }
     }
 }

@@ -35,9 +35,27 @@ namespace RiskService.Models
             double variance = 0;
             for (int i = 0; i < nbYears; i++)
             {
-                variance = Math.Pow(variance + (AROR[i] - avgROR), 2);
+                variance = variance + Math.Pow((AROR[i] - avgROR), 2);
             }
             variance = variance / nbYears;
+            return Math.Sqrt(variance);
+            //return GetAnnualRateOfReturn(companySymbol);
+        }
+        public static double GetStandardDeviationRisk(string companySymbol)
+        {
+            List<double> AROR = GetAnnualRateOfReturn(companySymbol);
+            double avgROR = 0;
+            for (int i = 0; i < 2; i++)
+            {
+                avgROR = +AROR[i];
+            }
+            avgROR = avgROR / 2;
+            double variance = 0;
+            for (int i = 0; i < 2; i++)
+            {
+                variance = variance + Math.Pow((AROR[i] - avgROR), 2);
+            }
+            variance = variance / 2;
             return Math.Sqrt(variance);
             //return GetAnnualRateOfReturn(companySymbol);
         }
