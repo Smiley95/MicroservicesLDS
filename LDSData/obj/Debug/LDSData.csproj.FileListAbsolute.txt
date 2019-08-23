@@ -50,6 +50,7 @@ C:\Users\ETaieb\Desktop\project\LDSData\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Antlr3.Runtime.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\EntityFramework.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\EntityFramework.SqlServer.dll
+C:\Users\ETaieb\Desktop\project\LDSData\bin\MathNet.Numerics.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Microsoft.Owin.Cors.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Microsoft.Owin.dll
@@ -73,6 +74,7 @@ C:\Users\ETaieb\Desktop\project\LDSData\bin\System.Web.WebPages.Razor.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\WebGrease.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\EntityFramework.xml
 C:\Users\ETaieb\Desktop\project\LDSData\bin\EntityFramework.SqlServer.xml
+C:\Users\ETaieb\Desktop\project\LDSData\bin\MathNet.Numerics.xml
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Microsoft.Owin.xml
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Microsoft.Owin.Cors.xml
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Microsoft.Owin.Host.SystemWeb.xml
@@ -91,6 +93,8 @@ C:\Users\ETaieb\Desktop\project\LDSData\bin\System.Web.WebPages.Deployment.xml
 C:\Users\ETaieb\Desktop\project\LDSData\bin\System.Web.WebPages.Razor.xml
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Antlr3.Runtime.pdb
 C:\Users\ETaieb\Desktop\project\LDSData\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\EntityFramework.resources.dll
+C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\EntityFramework.SqlServer.resources.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\System.Net.Http.Formatting.resources.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\System.Web.Helpers.resources.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\System.Web.Http.resources.dll
@@ -101,12 +105,8 @@ C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\System.Web.Razor.resources.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\System.Web.WebPages.resources.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\System.Web.WebPages.Deployment.resources.dll
 C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\System.Web.WebPages.Razor.resources.dll
+C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.csprojAssemblyReference.cache
 C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.csproj.CoreCompileInputs.cache
 C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.csproj.CopyComplete
 C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.dll
 C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.pdb
-C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\EntityFramework.resources.dll
-C:\Users\ETaieb\Desktop\project\LDSData\bin\fr\EntityFramework.SqlServer.resources.dll
-C:\Users\ETaieb\Desktop\project\LDSData\obj\Debug\LDSData.csprojAssemblyReference.cache
-C:\Users\ETaieb\Desktop\project\LDSData\bin\MathNet.Numerics.dll
-C:\Users\ETaieb\Desktop\project\LDSData\bin\MathNet.Numerics.xml

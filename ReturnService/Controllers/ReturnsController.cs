@@ -20,9 +20,9 @@ namespace ReturnService.Controllers
         private LDSEntities db = new LDSEntities();
 
         // GET: api/Returns
-        public IHttpActionResult GetReturns(string companySymbol)
+        public IHttpActionResult GetROAReturns(string companySymbol)
         {
-            double claimTerms = HttpHelper.GetCompanyFinancialState(companySymbol);
+            double claimTerms = HttpHelper.getROA(companySymbol);
             return Ok(claimTerms);
         }
 

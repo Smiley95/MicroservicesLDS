@@ -35,6 +35,7 @@ namespace LDSData.Controllers
             return repository.GetAll();
         }
 
+
         // GET: api/Portfolios/GetPortfolio?id=5
         [ResponseType(typeof(Portfolio))]
         public IHttpActionResult GetPortfolio(string id)
@@ -113,7 +114,7 @@ namespace LDSData.Controllers
                 return Ok(PBetaRisk);
             }
         }
-        // GET: api/Portfolios/GetPortfolioMarketRisk?id=5
+        // GET: api/Portfolios/GetPortfolioVarianceRisk?id=5
         public IHttpActionResult GetPortfolioVarianceRisk(string id)
         {
             Portfolio portfolio = repository.GetById(id);
@@ -136,7 +137,7 @@ namespace LDSData.Controllers
                         res =+(portfolio.Asset.ElementAt(i).Asset_nbShare / summAsset) * (portfolio.Asset.ElementAt(j).Asset_nbShare / summAsset)* HttpHelper.GetAssetVar(portfolio.Asset.ElementAt(i).Company_symbol)* HttpHelper.GetAssetVar(portfolio.Asset.ElementAt(j).Company_symbol)*correlation.ElementAt(i).ElementAt(j);
                     }
                 }
-                return Ok(res);
+                return Ok(Math.Sqrt(res));
             }
         }
 

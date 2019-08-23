@@ -13,20 +13,7 @@ namespace ReturnService.Models
 {
     public class HttpHelper
     {
-        /*public static async Task<T> Get<T>(string url)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44310");
-                var result = await client.GetAsync(url);
-                result.EnsureSuccessStatusCode();
-                string resultContentString = await result.Content.ReadAsStringAsync();
-                T resultContent = JsonConvert.DeserializeObject<T>(resultContentString);
-                return resultContent;
-            }
-        }*/
-
-        public static double GetCompanyFinancialState(string companySymbol)
+        public static double getROA(string companySymbol)
         {
             double netIncome, totalAsset;
             using (var clientIncome = new HttpClient())
