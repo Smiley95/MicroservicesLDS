@@ -55,7 +55,7 @@ namespace RiskService.Models
             {
                 variance = variance + Math.Pow((AROR[i] - avgROR), 2);
             }
-            variance = variance / 2;
+            variance = variance /2;
             return Math.Sqrt(variance);
             //return GetAnnualRateOfReturn(companySymbol);
         }

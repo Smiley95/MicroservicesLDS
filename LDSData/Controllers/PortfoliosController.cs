@@ -144,7 +144,7 @@ namespace LDSData.Controllers
         // GET: api/GetPortfoliosByInvestor
         [HttpGet]
         [ResponseType(typeof(IEnumerable<Portfolio>))]
-        public IHttpActionResult GetPortfoliosByInvestor([FromBody]string InvestorID)
+        public IHttpActionResult GetPortfoliosByInvestor(string InvestorID)
         {
             return Ok(repository.GetAll().Where(c => c.Investor_ID.Equals(InvestorID)).Select(e => e));
         }
@@ -256,7 +256,7 @@ namespace LDSData.Controllers
                 history.Add(HttpHelper.GetPriceHist(portfolio.Asset.ElementAt(i).Company_symbol));
                 means.Add(HttpHelper.GetPriceHist(portfolio.Asset.ElementAt(i).Company_symbol).Mean());
             }
-            //calculate each asset^2
+            //calculate each asset^2 and assetprice- avg
             for (int i = 0; i < history.Count(); i++)
             {
                 List<double> temp1 = new List<double>();

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
-import './login.css';
-import HomePage from './homePage';
+import Dashboard from './dashboard';
 
 class Login extends React.Component {
     constructor(props){
@@ -65,7 +64,7 @@ class Login extends React.Component {
         
           <Router>
           <Redirect to='/home'/>
-          <Route exact path="/home" render={(props) => <HomePage {...props} token={this.state.token} username={this.state.username} password={this.state.password} />}/>
+          <Route exact path="/home" render={(props) => <Dashboard {...props} token={this.state.token} username={this.state.username} password={this.state.password} />}/>
         </Router>
         );
       }
