@@ -46,7 +46,7 @@ namespace LDSData.Controllers
         }
 
         // GET: api/GetAssetsByPortfolio
-        [HttpGet]
+        [HttpPost]
         [ResponseType(typeof(IEnumerable<Asset>))]
         public IHttpActionResult GetAssetsByPortfolio([FromBody]string PortfolioID)
         {
